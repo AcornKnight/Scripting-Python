@@ -43,14 +43,14 @@ def operation_resize(filename,resize0,resize1):
      myimage = Image.open(filename)
 	 resizedImage = myimage.resize((resize0, resize1))
 	 resizedImage.save('resized.png')
-     shutil.copy('resized.png','processed')
+    shutil.copy({join('resized.',filename)},'processed')
 
 def operation_crop(filename,crop0,crop1):
 
      myimage = Image.open(argv.filename)
 	 croppedIm = myimage.crop((imagesize[0], imagesize[1], crop0, crop1))
 	 croppedIm.save('cropped.png')
-     shutil.copy('cropped.png','processed')
+     shutil.copy({join('cropped.',filename)},'processed')
 	 
 def operation_sign(filename,sign):
 
@@ -58,19 +58,19 @@ def operation_sign(filename,sign):
 	// crCopyIm = CopyIm.crop((500, 500, 900, 900))
 	CopyIm.paste(sign, (300, 300))
 	CopyIm.save('signed.png')
-    shutil.copy('signed.png','processed')
+    shutil.copy({join('signed.',filename)},'processed')
 	 
 def operation_rotate(filename,rotate):
 
      myimage = Image.open(filename)
-	 rotatedImage=myimage.rotate)
+	 rotatedImage=myimage(rotate)
 	 rotatedImage.save('rotated.png')
-     shutil.copy('rotated.png','processed')
+     shutil.copy({join('rotated.',filename)},'processed')
 	 
-
 	 
 	 
 # Checks input to see if input is a file or a directory, if it is a directory, processes it.
+queue = []
 
 if os.path.isdir(argv.filename):
     filepart = os.path.splitext(argv.filename)
@@ -80,9 +80,11 @@ if os.path.isdir(argv.filename):
         os.system('tar -xvf {argv.filename}')
 
 # helpme = argv.filename
-for file in glob.glob("{argv.filename}/*.png"):
-    shutil.copy(file, '.')
+    for file in glob.glob("{argv.filename}/*.png"):
+        shutil.copy(file, '.')
     
+    else:
+        queue.append(argv.filename)
     
 # Function Call
 
